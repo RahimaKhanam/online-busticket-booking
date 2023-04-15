@@ -1,0 +1,258 @@
+{
+  "cities": [
+    {
+      "id": 201,
+      "cityName": "Chennai"
+    },
+    {
+      "id": 202,
+      "cityName": "Mumbai"
+    },
+    {
+      "id": 203,
+      "cityName": "Delhi"
+    },
+    {
+      "id": 204,
+      "cityName": "Bangalore"
+    },
+    {
+      "id": 205,
+      "cityName": "Trivandrum"
+    },
+    {
+      "id": 206,
+      "cityName": "Pondicherry"
+    },
+    {
+      "id": 207,
+      "cityName": "Trichy"
+    },
+    {
+      "id": 208,
+      "cityName": "Salem"
+    },
+    {
+      "id": 209,
+      "cityName": "Vishakapatnam"
+    },
+    {
+      "id": 210,
+      "cityName": "Agra"
+    }
+  ],
+  "bus": [
+    {
+      "id": 101,
+      "busName": "Rockfort Travels",
+      "busTicketFare": 3000,
+      "busFromId": 201,
+      "busToId": 202,
+      "busTotalSeats": 32,
+      "busImageUrl": [
+        "https://images.unsplash.com/photo-1570125909517-53cb21c89ff2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+        "https://images.unsplash.com/photo-1532939163844-547f958e91b4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=388&q=80",
+        "https://images.unsplash.com/photo-1494515843206-f3117d3f51b7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1172&q=80"
+      ]
+    },
+    {
+      "id": 102,
+      "busName": "Akash Travels",
+      "busTicketFare": 1500,
+      "busFromId": 201,
+      "busToId": 207,
+      "busTotalSeats": 32,
+      "busImageUrl": [
+        "https://images.unsplash.com/photo-1562620669-98104534c6cd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
+        "https://images.unsplash.com/photo-1532939163844-547f958e91b4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=388&q=80",
+        "https://images.unsplash.com/photo-1494515843206-f3117d3f51b7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1172&q=80"
+      ]
+    },
+    {
+      "id": 103,
+      "busName": "Rockfort Travels",
+      "busTicketFare": 2000,
+      "busFromId": 201,
+      "busToId": 204,
+      "busTotalSeats": 32,
+      "busImageUrl": [
+        "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80",
+        "https://images.unsplash.com/photo-1532939163844-547f958e91b4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=388&q=80",
+        "https://images.unsplash.com/photo-1494515843206-f3117d3f51b7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1172&q=80"
+      ]
+    }
+  ],
+  "bus-routes": [
+    {
+      "id": 301,
+      "busId": 101,
+      "busTravelDateTime": "Wed Feb 10 2023 13:00:00",
+      "busSeatsTaken": [
+        1,
+        2,
+        3,
+        11,
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "id": 302,
+      "busId": 101,
+      "busTravelDateTime": "Wed Feb 17 2023 13:00:00",
+      "busSeatsTaken": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32
+      ]
+    },
+    {
+      "id": 303,
+      "busId": 101,
+      "busTravelDateTime": "Wed Feb 24 2023 13:00:00",
+      "busSeatsTaken": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29
+      ]
+    },
+    {
+      "id": 304,
+      "busId": 101,
+      "busTravelDateTime": "Wed Mar 10 2023 13:00:00",
+      "busSeatsTaken": []
+    },
+    {
+      "id": 305,
+      "busId": 102,
+      "busTravelDateTime": "Wed Feb 12 2023 16:00:00",
+      "busSeatsTaken": []
+    },
+    {
+      "id": 306,
+      "busId": 102,
+      "busTravelDateTime": "Wed Feb 19 2023 16:00:00",
+      "busSeatsTaken": []
+    },
+    {
+      "id": 307,
+      "busId": 102,
+      "busTravelDateTime": "Wed Feb 26 2023 16:00:00",
+      "busSeatsTaken": [
+        11,
+        12,
+        15
+      ]
+    },
+    {
+      "id": 308,
+      "busId": 103,
+      "busTravelDateTime": "Wed Feb 08 2023 10:00:00",
+      "busSeatsTaken": []
+    },
+    {
+      "id": 309,
+      "busId": 103,
+      "busTravelDateTime": "Wed Feb 15 2023 10:00:00",
+      "busSeatsTaken": []
+    },
+    {
+      "id": 310,
+      "busId": 103,
+      "busTravelDateTime": "Wed Feb 22 2023 10:00:00",
+      "busSeatsTaken": []
+    }
+  ],
+  "reservations": [
+    {
+      "id": 501,
+      "resBusRouteId": 301,
+      "resSeatsTaken": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "id": 502,
+      "resBusRouteId": 301,
+      "resSeatsTaken": [
+        11,
+        12
+      ]
+    },
+    {
+      "id": 503,
+      "resBusRouteId": 301,
+      "resSeatsTaken": [
+        13,
+        14
+      ]
+    },
+    {
+      "id": 504,
+      "resBusRouteId": 307,
+      "resSeatsTaken": [
+        11,
+        12,
+        15
+      ]
+    }
+  ]
+}
