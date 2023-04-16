@@ -1,0 +1,56 @@
+<div class="container">
+    <h5 class="bg-warning border border-dark m-5">Bus ticket booked successfully! Please take a printout of the ticket displayed below.</h5>
+    <div class="card">
+        <div class="card-header">
+            <h4>Ticket Details</h4>
+        </div>
+        <div class="card-body">
+            <table class="table table-dark table-striped">
+                <tbody>
+                    <tr>
+                        <td>Reservation ID:</td>
+                        <td>{{ fetchedRes.id }}</td>
+                    </tr>
+                    <tr>
+                        <td>Travels Name:</td>
+                        <td>{{ fetchedBus.busName }}</td>
+                    </tr>
+                    <tr>
+                        <td>Travel Date:</td>
+                        <td>{{ fetchedBusRoute.busTravelDateTime | date }}</td>
+                    </tr>
+                    <tr>
+                        <td>Departure Time:</td>
+                        <td>{{ fetchedBusRoute.busTravelDateTime | date:'hh:mm a' }}</td>
+                    </tr>
+                    <tr>
+                        <td>Source:</td>
+                        <td>
+                            <span *ngFor="let city of allCities">
+                                <span *ngIf="city.id==fetchedBus.busFromId">{{ city.cityName }}</span>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Destination:</td>
+                        <td>
+                            <span *ngFor="let city of allCities">
+                                <span *ngIf="city.id==fetchedBus.busToId">{{ city.cityName }}</span>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Selected Seats:</td>
+                        <td><span *ngFor="let seat of fetchedRes.resSeatsTaken">{{ seat }},</span></td>
+                    </tr>
+                    <tr>
+                        <td>Total Cost:</td>
+                        <td>Rs.{{ fetchedRes.resSeatsTaken.length * fetchedBus.busTicketFare }}</td>
+                    </tr>
+                </tbody>
+            </table>
+           
+            <a routerLink="" class="btn btn-primary my-2">Back to Bus List</a>
+        </div>
+    </div>
+</div>

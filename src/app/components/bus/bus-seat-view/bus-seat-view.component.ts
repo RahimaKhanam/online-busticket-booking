@@ -102,7 +102,10 @@ export class BusSeatViewComponent implements OnInit {
     }
 
     this.reservationService.addReservation(newReservation).subscribe({
-      next: (response)=>{ console.log(response)},
+      next: (response)=>{ 
+        console.log(response);
+        this.router.navigate(['reservation-success', response.id]);
+      },
       error: (err)=>console.log(err)
     })
   }  

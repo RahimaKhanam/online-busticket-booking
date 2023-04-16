@@ -261,6 +261,22 @@
         5,
         6
       ]
+    },
+    {
+      "id": 506,
+      "resBusRouteId": 301,
+      "resSeatsTaken": [
+        9,
+        10
+      ]
+    },
+    {
+      "id": 507,
+      "resBusRouteId": 301,
+      "resSeatsTaken": [
+        9,
+        10
+      ]
     }
   ]
 }
