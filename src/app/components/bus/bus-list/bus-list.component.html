@@ -1,0 +1,36 @@
+<div class="container m-5 p-5">
+    <h2>LIST OF BUS</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>IMAGE</th>
+                <th>NAME</th>
+                <th>FROM </th>
+                <th>TO</th>
+                <th>FARE</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let eachBus of allBus" >
+                <td>{{ eachBus.id }}</td>
+                <td><img [src]="eachBus.busImageUrl[0]" height="80px" width="100px" ></td>
+                <td>{{ eachBus.busName }}</td>
+                <td>
+                    <span *ngFor="let city of allCities">
+                        <span *ngIf="eachBus.busFromId==city.id">{{ city.cityName }}</span>
+                    </span>
+                </td>
+                <td>
+                    <span *ngFor="let city of allCities">
+                        <span *ngIf="eachBus.busToId==city.id">{{ city.cityName }}</span>
+                    </span>
+                </td>
+                <td>{{ eachBus.busTicketFare }}</td>
+                <td><button type="button" class="btn btn-warning" (click)="viewRoutes(eachBus.id)">View Routes</button></td>
+
+            </tr>
+        </tbody>
+    </table>
+</div>

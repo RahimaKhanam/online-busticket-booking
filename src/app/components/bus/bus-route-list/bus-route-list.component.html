@@ -1,0 +1,86 @@
+<div class="container m-5 p-5">
+    <h2>BUS DETAILS</h2>
+    <div class="card" style="width:1300px">
+        <!--carousel start-->
+        <div id="demo" class="carousel slide" data-bs-ride="carousel">
+
+            <!-- Indicators/dots -->
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+            </div>
+
+            <!-- The slideshow/carousel -->
+            <div class="carousel-inner">
+                <div class="carousel-item active" *ngFor="let eachImageUrl of viewBus.busImageUrl">
+                    <img [src]="eachImageUrl" [alt]="viewBus.busName" class="d-block w-100" width="200px" height="400px">
+                </div>
+            </div>
+
+            <!-- Left and right controls/icons -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+        </div>
+
+        <!--carousel end-->
+
+        <div class="card-body">
+            <h3>BUS INFORMATION</h3>
+            <div>Bus ID: {{ viewBus.id }}</div>
+            <div>Bus Name: {{ viewBus.busName }}</div>
+            <div>
+                Source:  
+                <span *ngFor="let city of allCities">
+                    <span *ngIf="viewBus.busFromId==city.id">{{ city.cityName }}</span>
+                </span>
+            </div>
+            <div>
+                Destination:  
+                <span *ngFor="let city of allCities">
+                    <span *ngIf="viewBus.busToId==city.id">{{ city.cityName }}</span>
+                </span>
+            </div>
+            <div>Bus Fare: {{ viewBus.busTicketFare | currency:'INR':'symbol'}}</div>
+        </div>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>TRAVEL DATE</th>
+                    <th>TRAVEL TIME</th>
+                    <th>SEATS LEFT </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let eachRoute of allBusRoutes" >
+                    <td>{{ eachRoute.id }}</td>
+                    <td>{{ eachRoute.busTravelDateTime | date:'dd-MM-yyyy' }}</td>
+                    <td>{{ eachRoute.busTravelDateTime | date:'hh:mm a' }}</td>
+                    <td *ngIf="viewBus.busTotalSeats-eachRoute.busSeatsTaken.length<=5 && !(viewBus.busTotalSeats-eachRoute.busSeatsTaken.length==0)" class="text-danger">
+                        Only {{ viewBus.busTotalSeats - eachRoute.busSeatsTaken.length }} seat(s) left!
+                    </td>
+                    <td *ngIf="viewBus.busTotalSeats - eachRoute.busSeatsTaken.length>5" class="text-success">
+                        {{ viewBus.busTotalSeats - eachRoute.busSeatsTaken.length }} seat(s) left!
+                    </td>
+                    <td *ngIf="viewBus.busTotalSeats - eachRoute.busSeatsTaken.length==0" class="text-danger">
+                        SOLD OUT!
+                    </td>
+                    <td>
+                        <button 
+                            type="button" 
+                            class="btn btn-primary" 
+                            (click)="viewSeats(eachRoute.id)"
+                            [disabled]="viewBus.busTotalSeats-eachRoute.busSeatsTaken.length==0">View Seats</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
