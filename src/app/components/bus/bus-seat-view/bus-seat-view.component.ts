@@ -31,69 +31,72 @@ export class BusSeatViewComponent implements OnInit {
     busFromId: 0,
     busToId: 0,
     busTotalSeats: 0,
-    busImageUrl: [] 
+    busImageUrl: []
   }
 
   totalSeats: number[] = [];
   constructor(private busService: BusService,
-              private busRoutesService: BusRoutesService,
-              private citiesService: CitiesService,
-              private router: Router,
-              private activatedRoute: ActivatedRoute,
-              private reservationService: ReservationsService) { }
+    private busRoutesService: BusRoutesService,
+    private citiesService: CitiesService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private reservationService: ReservationsService) { }
 
   ngOnInit(): void {
     this.citiesService.fetchAllCities().subscribe({
-      next: (response)=>{this.allCities = response},
-      error: (err)=>{console.log(err)}
+      next: (response) => { this.allCities = response },
+      error: (err) => { console.log(err) }
     });
 
     let busRouteId = this.activatedRoute.snapshot.paramMap.get("brid");
 
-    if(busRouteId!=null){
+    if (busRouteId != null) {
       this.busRoutesService.fetchABusRoute(+busRouteId).subscribe({
-        next: (response)=>{
+        next: (response) => {
           this.viewBusRoute = response;
           this.busService.fetchABus(this.viewBusRoute.busId).subscribe({
-            next: (resp)=>{
+            next: (resp) => {
               this.viewBus = resp;
-              for(let i=1;i<=this.viewBus.busTotalSeats;i++){
+              for (let i = 1; i <= this.viewBus.busTotalSeats; i++) {
                 this.totalSeats.push(i);
               }
             },
-            error: (err)=>console.log(err)
+            error: (err) => console.log(err)
           })
-        
+
         },
-        error: (err)=>{console.log(err)}
+        error: (err) => { console.log(err) }
       })
     }
-    
+
   }
 
-  seatDisplay(seat: number){
-    if(this.viewBusRoute.busSeatsTaken.findIndex((eachSeat)=>eachSeat==seat)!=-1){
+  seatDisplay(seat: number) {
+    if (this.viewBusRoute.busSeatsTaken.findIndex((eachSeat) => eachSeat == seat) != -1) {
       // this means the seat is already taken
       this.color = "RED";
-    }else if(this.selectedSeats.findIndex((eachSeat)=>eachSeat==seat)!=-1){
-      this.color='GREEN';
-    }else{
-      this.color='LIGHT';
+    } else if (this.selectedSeats.findIndex((eachSeat) => eachSeat == seat) != -1) {
+      this.color = 'GREEN';
+    } else {
+      this.color = 'LIGHT';
     }
     return this.color;
 
   }
 
-  addToSeatsSelected(seatNo: number){
-    if(this.selectedSeats.findIndex((eachSeat)=>eachSeat==seatNo)!=-1){
-      this.selectedSeats.splice(this.selectedSeats.findIndex((eachSeat)=>eachSeat==seatNo),1);
-    }else{
+  addToSeatsSelected(seatNo: number) {
+    // if that seat is found in the array
+    if (this.selectedSeats.findIndex((eachSeat) => eachSeat == seatNo) != -1) {
+      this.selectedSeats.splice(this.selectedSeats.findIndex((eachSeat) => eachSeat == seatNo), 1);
+    }
+    // if is it not found we push it to the array
+    else {
       this.selectedSeats.push(seatNo);
     }
     this.seatDisplay(seatNo);
   }
 
-  reserveTickets(){
+  reserveTickets() {
     // here we should reserve the ticket - similar to add student
     let newReservation: Reservations = {
       id: 0,
@@ -102,11 +105,11 @@ export class BusSeatViewComponent implements OnInit {
     }
 
     this.reservationService.addReservation(newReservation).subscribe({
-      next: (response)=>{ 
+      next: (response) => {
         console.log(response);
         this.router.navigate(['reservation-success', response.id]);
       },
-      error: (err)=>console.log(err)
+      error: (err) => console.log(err)
     })
-  }  
+  }
 }
