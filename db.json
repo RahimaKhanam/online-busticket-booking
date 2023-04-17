@@ -341,6 +341,14 @@
       "id": 517,
       "resBusRouteId": 301,
       "resSeatsTaken": []
+    },
+    {
+      "id": 518,
+      "resBusRouteId": 309,
+      "resSeatsTaken": [
+        16,
+        12
+      ]
     }
   ]
 }
