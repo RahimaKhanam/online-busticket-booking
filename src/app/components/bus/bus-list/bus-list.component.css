@@ -1,0 +1,15 @@
+.filter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.card{
+    width: 400px;
+}
+
+.default-text{
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: red;
+}

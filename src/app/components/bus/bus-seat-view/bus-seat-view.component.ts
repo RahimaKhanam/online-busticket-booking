@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BusRoutes } from 'src/app/models/bus-routes.model';
 import { Bus } from 'src/app/models/bus.model';
@@ -22,7 +22,8 @@ export class BusSeatViewComponent implements OnInit {
     id: 0,
     busId: 0,
     busTravelDateTime: new Date(),
-    busSeatsTaken: []
+    coachType: '',
+    busSeatsTaken: [],
   }
   viewBus: Bus = {
     id: 0,
@@ -33,8 +34,10 @@ export class BusSeatViewComponent implements OnInit {
     busTotalSeats: 0,
     busImageUrl: []
   }
-
   totalSeats: number[] = [];
+  @ViewChild('closeModal') closeModal !: ElementRef;
+  errorMsg :any;
+
   constructor(private busService: BusService,
     private busRoutesService: BusRoutesService,
     private citiesService: CitiesService,
@@ -43,6 +46,7 @@ export class BusSeatViewComponent implements OnInit {
     private reservationService: ReservationsService) { }
 
   ngOnInit(): void {
+    sessionStorage.clear();
     this.citiesService.fetchAllCities().subscribe({
       next: (response) => { this.allCities = response },
       error: (err) => { console.log(err) }
@@ -97,19 +101,34 @@ export class BusSeatViewComponent implements OnInit {
   }
 
   reserveTickets() {
+    let userDetails = sessionStorage.getItem('userDetails');
+    console.log(userDetails);
     // here we should reserve the ticket - similar to add student
-    let newReservation: Reservations = {
-      id: 0,
-      resBusRouteId: this.viewBusRoute.id,
-      resSeatsTaken: this.selectedSeats
+    if(userDetails){
+      let newReservation: Reservations = {
+        id: 0,
+        resBusRouteId: this.viewBusRoute.id,
+        resSeatsTaken: this.selectedSeats
+      }
+  
+      this.reservationService.addReservation(newReservation).subscribe({
+        next: (response) => {
+          console.log(response);
+          this.router.navigate(['reservation-success', response.id]);
+        },
+        error: (err) => console.log(err)
+      })
     }
+    else{
+      this.errorMsg = 'Please save Passenger Details first'
+    }
+  }
 
-    this.reservationService.addReservation(newReservation).subscribe({
-      next: (response) => {
-        console.log(response);
-        this.router.navigate(['reservation-success', response.id]);
-      },
-      error: (err) => console.log(err)
-    })
+  saveDetails(form: any){
+    console.log(form.value);
+    sessionStorage.setItem('userDetails', JSON.stringify(form.value));
+    this.errorMsg = '';
+    alert("Passenger Details saved!");
+    this.closeModal.nativeElement.click();
   }
 }

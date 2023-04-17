@@ -95,7 +95,8 @@
         12,
         13,
         14
-      ]
+      ],
+      "coachType": "AC"
     },
     {
       "id": 302,
@@ -134,7 +135,8 @@
         30,
         31,
         32
-      ]
+      ],
+      "coachType": "Non AC"
     },
     {
       "id": 303,
@@ -170,25 +172,29 @@
         27,
         28,
         29
-      ]
+      ],
+      "coachType": "AC"
     },
     {
       "id": 304,
       "busId": 101,
       "busTravelDateTime": "Wed Mar 10 2023 13:00:00",
-      "busSeatsTaken": []
+      "busSeatsTaken": [],
+      "coachType": "AC"
     },
     {
       "id": 305,
       "busId": 102,
       "busTravelDateTime": "Wed Feb 12 2023 16:00:00",
-      "busSeatsTaken": []
+      "busSeatsTaken": [],
+      "coachType": "Non AC"
     },
     {
       "id": 306,
       "busId": 102,
       "busTravelDateTime": "Wed Feb 19 2023 16:00:00",
-      "busSeatsTaken": []
+      "busSeatsTaken": [],
+      "coachType": "AC"
     },
     {
       "id": 307,
@@ -198,25 +204,29 @@
         11,
         12,
         15
-      ]
+      ],
+      "coachType": "Non AC"
     },
     {
       "id": 308,
       "busId": 103,
       "busTravelDateTime": "Wed Feb 08 2023 10:00:00",
-      "busSeatsTaken": []
+      "busSeatsTaken": [],
+      "coachType": "AC"
     },
     {
       "id": 309,
       "busId": 103,
       "busTravelDateTime": "Wed Feb 15 2023 10:00:00",
-      "busSeatsTaken": []
+      "busSeatsTaken": [],
+      "coachType": "AC"
     },
     {
       "id": 310,
       "busId": 103,
       "busTravelDateTime": "Wed Feb 22 2023 10:00:00",
-      "busSeatsTaken": []
+      "busSeatsTaken": [],
+      "coachType": "Non AC"
     }
   ],
   "reservations": [
@@ -277,6 +287,60 @@
         9,
         10
       ]
+    },
+    {
+      "id": 508,
+      "resBusRouteId": 301,
+      "resSeatsTaken": [
+        20
+      ]
+    },
+    {
+      "id": 509,
+      "resBusRouteId": 301,
+      "resSeatsTaken": []
+    },
+    {
+      "id": 510,
+      "resBusRouteId": 301,
+      "resSeatsTaken": []
+    },
+    {
+      "id": 511,
+      "resBusRouteId": 301,
+      "resSeatsTaken": []
+    },
+    {
+      "id": 512,
+      "resBusRouteId": 301,
+      "resSeatsTaken": []
+    },
+    {
+      "id": 513,
+      "resBusRouteId": 301,
+      "resSeatsTaken": []
+    },
+    {
+      "id": 514,
+      "resBusRouteId": 301,
+      "resSeatsTaken": []
+    },
+    {
+      "id": 515,
+      "resBusRouteId": 301,
+      "resSeatsTaken": []
+    },
+    {
+      "id": 516,
+      "resBusRouteId": 308,
+      "resSeatsTaken": [
+        8
+      ]
+    },
+    {
+      "id": 517,
+      "resBusRouteId": 301,
+      "resSeatsTaken": []
     }
   ]
 }

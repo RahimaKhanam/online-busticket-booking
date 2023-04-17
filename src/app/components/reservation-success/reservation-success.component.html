@@ -1,56 +1,72 @@
 <div class="container">
-    <h5 class="bg-warning border border-dark m-5">Bus ticket booked successfully! Please take a printout of the ticket displayed below.</h5>
-    <div class="card">
-        <div class="card-header">
-            <h4>Ticket Details</h4>
+    <h5 class="bg-green m-5">Bus ticket booked successfully! Please take a printout of the
+        ticket displayed below.</h5>
+    <h2 class="text-center">Online Reservation</h2>
+    <div class="location-date row">
+        <div class="col-md-6">
+            <span *ngFor="let city of allCities">
+                <strong *ngIf="city.id==fetchedBus.busFromId">{{ city.cityName }}</strong>
+            </span> &nbsp;
+            <span *ngFor="let city of allCities">
+                <strong *ngIf="city.id==fetchedBus.busToId">{{ city.cityName }}</strong>
+            </span>
         </div>
-        <div class="card-body">
-            <table class="table table-dark table-striped">
-                <tbody>
-                    <tr>
-                        <td>Reservation ID:</td>
-                        <td>{{ fetchedRes.id }}</td>
-                    </tr>
-                    <tr>
-                        <td>Travels Name:</td>
-                        <td>{{ fetchedBus.busName }}</td>
-                    </tr>
-                    <tr>
-                        <td>Travel Date:</td>
-                        <td>{{ fetchedBusRoute.busTravelDateTime | date }}</td>
-                    </tr>
-                    <tr>
-                        <td>Departure Time:</td>
-                        <td>{{ fetchedBusRoute.busTravelDateTime | date:'hh:mm a' }}</td>
-                    </tr>
-                    <tr>
-                        <td>Source:</td>
-                        <td>
-                            <span *ngFor="let city of allCities">
-                                <span *ngIf="city.id==fetchedBus.busFromId">{{ city.cityName }}</span>
-                            </span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Destination:</td>
-                        <td>
-                            <span *ngFor="let city of allCities">
-                                <span *ngIf="city.id==fetchedBus.busToId">{{ city.cityName }}</span>
-                            </span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Selected Seats:</td>
-                        <td><span *ngFor="let seat of fetchedRes.resSeatsTaken">{{ seat }},</span></td>
-                    </tr>
-                    <tr>
-                        <td>Total Cost:</td>
-                        <td>Rs.{{ fetchedRes.resSeatsTaken.length * fetchedBus.busTicketFare }}</td>
-                    </tr>
-                </tbody>
-            </table>
-           
-            <a routerLink="" class="btn btn-primary my-2">Back to Bus List</a>
+        <div class="col-md-6">
+            {{ fetchedBusRoute.busTravelDateTime | date: 'MMMM d, y' }}
         </div>
     </div>
+    <div class="card">
+        <div class="card-body row">
+            <div class="col-md-3">
+                <div class="fare-details">
+                    <strong>Passenger Details</strong>
+                </div>
+                <div><strong>{{userData.username}}</strong></div>
+                <div>{{userData.phoneNo}}</div>
+                <div>{{userData.email}}</div>
+            </div>
+            <div class="col-md-3">
+                <div class="fare-details">
+                    <strong>Ticket Id</strong>
+                </div>
+                <div>{{ fetchedRes.id }}</div>
+            </div>
+            <div class="col-md-3">
+                <div class="fare-details">
+                    <strong>Seat No.</strong>
+                </div>
+                <div><span *ngFor="let seat of fetchedRes.resSeatsTaken">{{ seat }},</span></div>
+            </div>
+            <div class="col-md-3">
+                <div class="fare-details">
+                    <strong>Total Fare</strong>
+                </div>
+                <div>Rs.{{ fetchedRes.resSeatsTaken.length * fetchedBus.busTicketFare }}</div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body row">
+            <div class="col-md-3">
+                <div class="fare-details">
+                    <strong>Bus Name</strong>
+                </div>
+                <div>{{ fetchedBus.busName }}</div>
+            </div>
+            <div class="col-md-3">
+                <div class="fare-details">
+                    <strong>Reporting Time</strong>
+                </div>
+                <div>Before 30 Minutes</div>
+            </div>
+            <div class="col-md-3">
+                <div class="fare-details">
+                    <strong>Departure Time</strong>
+                </div>
+                <div>{{ fetchedBusRoute.busTravelDateTime | date:'hh:mm a' }}</div>
+            </div>
+        </div>
+    </div>
+
+    <h5 class="text-danger text-center">** Please bring this copy to ticket counter to collect your ticket.</h5>
 </div>

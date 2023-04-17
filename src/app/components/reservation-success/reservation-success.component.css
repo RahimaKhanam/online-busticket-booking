@@ -1,0 +1,25 @@
+.location-date{
+    background-color: rgb(250, 250, 208);
+    padding: 1% 0;
+    font-size: 1.2rem;
+    color: #474747;
+}
+
+.card{
+    margin: 2% 0;
+}
+
+.bg-green{
+    background-color: rgb(79, 196, 79);
+    font-size: 2rem;
+    text-align: center;
+}
+
+h2{
+    margin: 2%;
+}
+
+.fare-details{
+    font-size: 1.2rem;
+    padding: 1% 0 10% 0;
+}

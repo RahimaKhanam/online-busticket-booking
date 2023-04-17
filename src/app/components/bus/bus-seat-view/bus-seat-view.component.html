@@ -1,4 +1,62 @@
-<div class="container m-5">
+<div class="container my-5">
+    <button routerLink="" class="btn btn-dark my-2">Back to Bus List</button>&nbsp;&nbsp;
+    <!-- Model Button -->
+    <button type="button" class="btn btn-primary my-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Passenger Information
+    </button>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Fill out Passenger Information</h5>
+                    <button  #closeModal type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form #myForm="ngForm" (ngSubmit)="saveDetails(myForm)">
+                                <div class="form-group m-2">
+                                    <label class="form-label" for="username">Username</label>
+                                    <input type="text" class="form-control" id="username" ngModel name="username"
+                                        required #myUsername="ngModel" placeholder="Enter Username"
+                                        [ngClass]="{'invalid-field':!myUsername.valid && myUsername.touched}">
+                                    <div class="text-danger text-small"
+                                        *ngIf="myUsername.errors?.['required'] && myUsername.touched">
+                                        Username is required
+                                    </div>
+                                </div>
+                                <div class="form-group m-2">
+                                    <label class="form-label" for="phoneNo">Mobile Number</label>
+                                    <input type="number" class="form-control" id="phoneNo" ngModel name="phoneNo"
+                                        required #myPhoneNo="ngModel" placeholder="Phone No."
+                                        [ngClass]="{'invalid-field':!myPhoneNo.valid && myPhoneNo.touched}">
+                                    <div class="text-danger text-small"
+                                        *ngIf="myPhoneNo.errors?.['required'] && myPhoneNo.touched">
+                                        Phone number is required
+                                    </div>
+                                </div>
+                                <div class="form-group m-2">
+                                    <label class="form-label" for="email">Email</label>
+                                    <input type="email" class="form-control" id="email" ngModel name="email" required
+                                        #myEmail="ngModel" placeholder="Email"
+                                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                                        [ngClass]="{'invalid-field':!myEmail.valid && myEmail.touched}">
+                                    <div class="text-danger text-small"
+                                        *ngIf="myEmail.errors?.['required'] && myEmail.touched">
+                                        Email is required
+                                    </div>
+                                    <div class="text-danger text-small"
+                                        *ngIf="myEmail.errors?.['pattern'] && myEmail.touched">
+                                        Enter a valid email address, e.g., rahima@example.com
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary m-2"
+                                    [disabled]="myForm.invalid">Submit</button>
+                       
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="card">
         <div class="card-header">
             <h2>Book Bus Ticket</h2>
@@ -8,34 +66,30 @@
                 <div class="col-4">
                     <div class="card">
                         <div class="card-header">
-                            <h5>Seat Layout</h5>
+                            <h5>Select Seats</h5>
                         </div>
                         <div class="card-body">
-                            <div class="border border-dark m-5">
+                            <div class="stearing">
+                                <img src="../../../../assets/images/stearing.png" alt="stearing" width="30px"
+                                    height="30px">
+                            </div>
+                            <div class="m-5">
                                 <span *ngFor="let n of totalSeats">
-                                    <button 
-                                        type="button" 
-                                        *ngIf="seatDisplay(n)=='RED'" 
-                                        class="btn btn-danger border border-dark" disabled>
+                                    <button type="button" *ngIf="seatDisplay(n)=='RED'"
+                                        class="btn btn-red border border-dark" disabled>
                                         <img src="../../../../assets/images/seat.png" width="30px" height="30px">
                                     </button>
-                                    <button 
-                                        type="button" 
-                                        *ngIf="seatDisplay(n)=='GREEN'" 
-                                        class="btn btn-success border border-dark" 
-                                        (click)="addToSeatsSelected(n)">
+                                    <button type="button" *ngIf="seatDisplay(n)=='GREEN'"
+                                        class="btn btn-green border border-dark" (click)="addToSeatsSelected(n)">
                                         <img src="../../../../assets/images/seat.png" width="30px" height="30px">
                                     </button>
-                                    <button 
-                                        type="button" 
-                                        *ngIf="seatDisplay(n)=='LIGHT'" 
-                                        class="btn btn-light border border-dark" 
-                                        (click)="addToSeatsSelected(n)">
+                                    <button type="button" *ngIf="seatDisplay(n)=='LIGHT'"
+                                        class="btn btn-light border border-dark" (click)="addToSeatsSelected(n)">
                                         <img src="../../../../assets/images/seat.png" width="30px" height="30px">
                                     </button>
                                     <span *ngIf="n%2==0 && !(n%4==0)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                     <div *ngIf="n%4==0"></div>
-                                       
+
                                 </span>
                             </div>
                         </div>
@@ -44,25 +98,25 @@
                 <div class="col-8">
                     <div class="card mb-5">
                         <div class="card-header">
-                            <h5>Bus Information</h5>
+                            <h5>Journey Details</h5>
                         </div>
                         <div class="card-body">
-                            <div>Bus ID: {{ viewBus.id }}</div>
-                            <div>Bus Name: {{ viewBus.busName }}</div>
-                            <div>
-                                Source:  
+                            <div class="bus-details"><strong>Bus ID: </strong> {{ viewBus.id }}</div>
+                            <div class="bus-details"><strong>Bus Name: </strong> {{ viewBus.busName }}</div>
+                            <div class="bus-details">
+                                <strong>Source: </strong>
                                 <span *ngFor="let city of allCities">
                                     <span *ngIf="viewBus.busFromId==city.id">{{ city.cityName }}</span>
                                 </span>
                             </div>
-                            <div>
-                                Destination:  
+                            <div class="bus-details">
+                                <strong>Destination: </strong>
                                 <span *ngFor="let city of allCities">
                                     <span *ngIf="viewBus.busToId==city.id">{{ city.cityName }}</span>
                                 </span>
                             </div>
-                            <div>Bus Fare: {{ viewBus.busTicketFare | currency:'INR':'symbol'}}</div>
-                        
+                            <div class="bus-details"><strong>Bus Fare: </strong> {{ viewBus.busTicketFare |
+                                currency:'INR':'symbol'}}</div>
                         </div>
                     </div>
                     <div class="card mt-5">
@@ -70,17 +124,20 @@
                             <h5>Seat Selection</h5>
                         </div>
                         <div class="card-body">
-                            <div>You have selected {{ selectedSeats.length }} seat(s)</div>
-                            <div>
-                                Seats Selected : 
+                            <div class="bus-details"><strong>You have selected: </strong> {{ selectedSeats.length }}
+                                seat(s)</div>
+                            <div class="bus-details">
+                                <strong>Seats Selected : </strong>
                                 <span *ngFor="let eachSeat of selectedSeats">
                                     {{ eachSeat }},
                                 </span>
                             </div>
-                            <div>Total Cost: Rs.{{ selectedSeats.length*viewBus.busTicketFare }}</div>
-                            <div>
-                                <button class="btn btn-success" (click)="reserveTickets()">Reserve Tickets</button>
+                            <div class="bus-details"><strong>Total Cost: </strong>Rs.{{
+                                selectedSeats.length*viewBus.busTicketFare }}</div>
+                            <div class="my-3">
+                                <button class="btn btn-success" (click)="reserveTickets()">Confirm</button>
                             </div>
+                            <p class="text-danger">{{errorMsg}}</p>
                         </div>
                     </div>
                 </div>

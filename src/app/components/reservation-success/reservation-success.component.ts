@@ -4,6 +4,7 @@ import { BusRoutes } from 'src/app/models/bus-routes.model';
 import { Bus } from 'src/app/models/bus.model';
 import { Cities } from 'src/app/models/cities.model';
 import { Reservations } from 'src/app/models/reservations.model';
+import { User } from 'src/app/models/user.model';
 import { BusRoutesService } from 'src/app/services/bus-routes.service';
 import { BusService } from 'src/app/services/bus.service';
 import { CitiesService } from 'src/app/services/cities.service';
@@ -26,7 +27,8 @@ export class ReservationSuccessComponent implements OnInit {
     id: 0,
     busId: 0,
     busTravelDateTime: new Date(),
-    busSeatsTaken: []
+    coachType: '',
+    busSeatsTaken: [],
   };
   
   fetchedBus: Bus = {
@@ -40,6 +42,7 @@ export class ReservationSuccessComponent implements OnInit {
   }
 
   allCities: Cities[] = [];
+  userData !: User;
   
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute,
@@ -49,6 +52,8 @@ export class ReservationSuccessComponent implements OnInit {
               private busService: BusService) { }
 
   ngOnInit(): void {
+    this.userData = JSON.parse(sessionStorage['userDetails'])
+    console.log(this.userData);
     this.citiesService.fetchAllCities().subscribe((response)=>{
       this.allCities = response;
     })

@@ -31,29 +31,30 @@
 
         <div class="card-body">
             <h3>BUS INFORMATION</h3>
-            <div>Bus ID: {{ viewBus.id }}</div>
-            <div>Bus Name: {{ viewBus.busName }}</div>
-            <div>
-                Source:  
+            <div class="bus-details"><strong>Bus ID:</strong> {{ viewBus.id }}</div>
+            <div class="bus-details"><strong>Bus Name:</strong> {{ viewBus.busName }}</div>
+            <div class="bus-details">
+                <strong>Source:</strong>  
                 <span *ngFor="let city of allCities">
                     <span *ngIf="viewBus.busFromId==city.id">{{ city.cityName }}</span>
                 </span>
             </div>
-            <div>
-                Destination:  
+            <div class="bus-details">
+                <strong>Destination: </strong> 
                 <span *ngFor="let city of allCities">
                     <span *ngIf="viewBus.busToId==city.id">{{ city.cityName }}</span>
                 </span>
             </div>
-            <div>Bus Fare: {{ viewBus.busTicketFare | currency:'INR':'symbol'}}</div>
+            <div class="bus-details"><strong>Bus Fare:</strong> {{ viewBus.busTicketFare | currency:'INR':'symbol'}}</div>
         </div>
 
-        <table class="table table-striped">
-            <thead>
+        <table class="table table-striped table-bordered">
+            <thead  class="bg-dark text-white">
                 <tr>
                     <th>ID</th>
-                    <th>TRAVEL DATE</th>
-                    <th>TRAVEL TIME</th>
+                    <th>DEPT. DATE</th>
+                    <th>DEPT. TIME</th>
+                    <th>COACH TYPE</th>
                     <th>SEATS LEFT </th>
                     <th></th>
                 </tr>
@@ -63,6 +64,7 @@
                     <td>{{ eachRoute.id }}</td>
                     <td>{{ eachRoute.busTravelDateTime | date:'dd-MM-yyyy' }}</td>
                     <td>{{ eachRoute.busTravelDateTime | date:'hh:mm a' }}</td>
+                    <td>{{ eachRoute.coachType }}</td>
                     <td *ngIf="viewBus.busTotalSeats-eachRoute.busSeatsTaken.length<=5 && !(viewBus.busTotalSeats-eachRoute.busSeatsTaken.length==0)" class="text-danger">
                         Only {{ viewBus.busTotalSeats - eachRoute.busSeatsTaken.length }} seat(s) left!
                     </td>

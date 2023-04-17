@@ -1,36 +1,88 @@
 <div class="container m-5 p-5">
-    <h2>LIST OF BUS</h2>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>IMAGE</th>
-                <th>NAME</th>
-                <th>FROM </th>
-                <th>TO</th>
-                <th>FARE</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let eachBus of allBus" >
-                <td>{{ eachBus.id }}</td>
-                <td><img [src]="eachBus.busImageUrl[0]" height="80px" width="100px" ></td>
-                <td>{{ eachBus.busName }}</td>
-                <td>
-                    <span *ngFor="let city of allCities">
-                        <span *ngIf="eachBus.busFromId==city.id">{{ city.cityName }}</span>
-                    </span>
-                </td>
-                <td>
-                    <span *ngFor="let city of allCities">
-                        <span *ngIf="eachBus.busToId==city.id">{{ city.cityName }}</span>
-                    </span>
-                </td>
-                <td>{{ eachBus.busTicketFare }}</td>
-                <td><button type="button" class="btn btn-warning" (click)="viewRoutes(eachBus.id)">View Routes</button></td>
+    <div class="filter">
+        <form #myForm="ngForm" (ngSubmit)="filterData(myForm)">
+            <div class="card">
+                <h3 class="card-header text-center">
+                    Search for a Bus
+                </h3>
+                <div class="card-body">
+                    <div class="form-group m-2">
+                        <label for="leaving">From</label>
+                        <select class="form-select" aria-label="Default select example" id="leaving" ngModel name="leaving" required
+                        #leavingFrom="ngModel" [ngClass]="{'is-invalid':!leavingFrom.valid && leavingFrom.touched}">
+                            <option value="" selected disabled>Choose a place</option>
+                            <option *ngFor="let city of allCities" [value]="city.id">{{ city.cityName }}</option>
+                        </select>
+                        <div class="text-danger text-small"
+                            *ngIf="leavingFrom.errors?.['required'] && leavingFrom.touched">
+                            Location is required
+                        </div>
+                    </div>
+                    <div class="form-group m-2">
+                        <label for="going">To</label>
+                        <select class="form-select" aria-label="Default select example" id="going" ngModel name="going" required
+                        #goingTo="ngModel" [ngClass]="{'is-invalid':!goingTo.valid && goingTo.touched}">
+                            <option value="" selected disabled>Choose a place</option>
+                            <option *ngFor="let city of allCities" [value]="city.id">{{ city.cityName }}</option>
+                        </select>
+                        <div class="text-danger text-small" *ngIf="goingTo.errors?.['required'] && goingTo.touched">
+                            Destination is required
+                        </div>
+                    </div>
+                    <div class="form-group m-2">
+                        <label for="departDate">Date of Departure</label>
+                        <input type="date" class="form-control" id="departDate" ngModel name="departDate" required
+                            #departingOn="ngModel"
+                            [ngClass]="{'is-invalid':!departingOn.valid && departingOn.touched}">
+                        <div class="text-danger text-small"
+                            *ngIf="departingOn.errors?.['required'] && departingOn.touched">
+                            Date is required
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary m-2" [disabled]="myForm.invalid">Search Buses</button>
+                    <button type="button" class="btn btn-success m-2" (click)="resetFilter()">Reset</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="bus-list">
+        <h2 class="text-center m-4">LIST OF BUSES</h2>
+        <table *ngIf="allBus.length; else noData" class="table table-striped table-bordered">
+            <thead class="bg-dark text-white">
+                <tr>
+                    <th>BUS ID</th>
+                    <th>BUS NAME</th>
+                    <th>FROM </th>
+                    <th>TO</th>
+                    <th>AVAILABLE SEATS</th>
+                    <th>FARE</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let eachBus of allBus">
+                    <td>{{ eachBus.id }}</td>
+                    <td>{{ eachBus.busName }}</td>
+                    <td>
+                        <span *ngFor="let city of allCities">
+                            <span *ngIf="eachBus.busFromId==city.id">{{ city.cityName }}</span>
+                        </span>
+                    </td>
+                    <td>
+                        <span *ngFor="let city of allCities">
+                            <span *ngIf="eachBus.busToId==city.id">{{ city.cityName }}</span>
+                        </span>
+                    </td>
+                    <td>{{ eachBus.busTotalSeats }}</td>
+                    <td>Rs {{ eachBus.busTicketFare }}</td>
+                    <td><button type="button" class="btn btn-primary" (click)="viewRoutes(eachBus.id)">View all
+                            Routes</button></td>
 
-            </tr>
-        </tbody>
-    </table>
+                </tr>
+            </tbody>
+        </table>
+        <ng-template #noData>
+            <p class="default-text">No buses available on this route</p>
+        </ng-template>
+    </div>
 </div>
